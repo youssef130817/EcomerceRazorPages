@@ -1,0 +1,62 @@
+@page
+@model Ecomerce.Pages_Produits.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1 class="text-3xl font-bold mb-4">Edit</h1>
+
+<h4 class="text-xl mb-2">Produit</h4>
+<hr class="mb-4" />
+
+<div class="max-w-md mx-auto">
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-red-500 mb-4"></div>
+        <input type="hidden" asp-for="Produit.Id" />
+
+        <div class="mb-4">
+            <label asp-for="Produit.Nom" class="block text-gray-700 text-sm font-bold mb-2"></label>
+            <input asp-for="Produit.Nom"
+                class="w-full py-2 px-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300" />
+            <span asp-validation-for="Produit.Nom" class="text-red-500"></span>
+        </div>
+
+        <div class="mb-4">
+            <label asp-for="Produit.Description" class="block text-gray-700 text-sm font-bold mb-2"></label>
+            <input asp-for="Produit.Description"
+                class="w-full py-2 px-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300" />
+            <span asp-validation-for="Produit.Description" class="text-red-500"></span>
+        </div>
+
+        <div class="mb-4">
+            <label asp-for="Produit.Prix" class="block text-gray-700 text-sm font-bold mb-2"></label>
+            <input asp-for="Produit.Prix"
+                class="w-full py-2 px-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300" />
+            <span asp-validation-for="Produit.Prix" class="text-red-500"></span>
+        </div>
+
+        <div class="mb-4">
+            <label asp-for="Produit.CategorieId" class="block text-gray-700 text-sm font-bold mb-2"></label>
+            <select asp-for="Produit.CategorieId"
+                class="w-full py-2 px-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
+                asp-items="ViewBag.CategorieId"></select>
+            <span asp-validation-for="Produit.CategorieId" class="text-red-500"></span>
+        </div>
+
+        <div class="mb-4">
+            <input type="submit" value="Save"
+                class="w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300" />
+        </div>
+    </form>
+</div>
+
+<div class="mt-4">
+    <a asp-page="./Index" class="text-blue-600 hover:underline">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

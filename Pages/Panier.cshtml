@@ -1,0 +1,58 @@
+@page
+@model Ecomerce.Pages.PanierModel
+@{
+    ViewData["Title"] = "Mon Panier";
+}
+
+<h2 class="text-2xl font-bold mb-4">@ViewData["Title"]</h2>
+
+@if (Model.Panier.Lignes.Count() == 0)
+{
+    <p>Le panier est vide.</p>
+}
+else
+{
+    <table class="min-w-full table-auto">
+        <thead class="bg-gray-200">
+            <tr>
+                <th class="px-4 py-2 text-left">Produit</th>
+                <th class="px-4 py-2 text-left">Quantité</th>
+                <th class="px-4 py-2 text-left">Prix unitaire</th>
+                <th class="px-4 py-2 text-left">Prix total</th>
+                <th class="px-4 py-2 text-left">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ligne in Model.Panier.Lignes)
+            {
+                <tr class="border-b">
+                    <td class="px-4 py-2">@ligne.NomProduit</td>
+                    <td class="px-4 py-2">
+                        <form method="post" asp-page-handler="ModifierQuantite" class="flex items-center">
+                            <input type="hidden" name="productId" value="@ligne.ProductId" />
+                            <input type="number" name="quantite" value="@ligne.Quantite" min="1"
+                                class="w-16 p-2 border border-gray-300 rounded-md mr-2 focus:ring focus:ring-blue-200" />
+                            <button type="submit"
+                                class="px-3 py-1 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300">
+                                Mettre à jour
+                            </button>
+                        </form>
+                    </td>
+                    <td class="px-4 py-2">@ligne.PrixUnitaire.ToString("C")</td>
+                    <td class="px-4 py-2">@ligne.PrixTotal.ToString("C")</td>
+                    <td class="px-4 py-2">
+                        <form method="post" asp-page-handler="SupprimerDuPanier">
+                            <input type="hidden" name="productId" value="@ligne.ProductId" />
+                            <button type="submit"
+                                class="px-3 py-1 bg-red-600 text-white text-sm rounded-md hover:bg-red-500 focus:outline-none focus:ring focus:ring-red-300">
+                                Supprimer
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <p class="mt-4 text-lg font-semibold">Total : @Model.Panier.Total().ToString("C")</p>
+}

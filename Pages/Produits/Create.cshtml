@@ -1,0 +1,67 @@
+@page
+@model Ecomerce.Pages_Produits.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1 class="text-3xl font-bold mb-4">Create</h1>
+
+<h4 class="text-xl mb-2">Produit</h4>
+<hr class="mb-4" />
+<div class="max-w-md mx-auto">
+    <form method="post" asp-page="/Produits/Create" enctype="multipart/form-data" class="space-y-4">
+        <div asp-validation-summary="ModelOnly" class="text-red-600"></div>
+
+        <div>
+            <label asp-for="Produit.Nom" class="block text-gray-700 font-medium mb-2"></label>
+            <input asp-for="Produit.Nom"
+                class="block w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:border-blue-300" />
+            <span asp-validation-for="Produit.Nom" class="text-red-600"></span>
+        </div>
+
+        <div>
+            <label asp-for="Produit.Description" class="block text-gray-700 font-medium mb-2"></label>
+            <input asp-for="Produit.Description"
+                class="block w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:border-blue-300" />
+            <span asp-validation-for="Produit.Description" class="text-red-600"></span>
+        </div>
+
+        <div>
+            <label asp-for="Produit.Prix" class="block text-gray-700 font-medium mb-2"></label>
+            <input asp-for="Produit.Prix"
+                class="block w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:border-blue-300" />
+            <span asp-validation-for="Produit.Prix" class="text-red-600"></span>
+        </div>
+
+        <div>
+            <label asp-for="Produit.CategorieId" class="block text-gray-700 font-medium mb-2"></label>
+            <select asp-for="Produit.CategorieId"
+                class="block w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:border-blue-300"
+                asp-items="ViewBag.CategorieId"></select>
+        </div>
+
+        <!-- New file input for the image -->
+        <div>
+            <label asp-for="Produit.ImageFile" class="block text-gray-700 font-medium mb-2"></label>
+            <input asp-for="Produit.ImageFile" type="file"
+                class="block w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:border-blue-300" />
+            <span asp-validation-for="Produit.ImageFile" class="text-red-600"></span>
+        </div>
+
+        <div>
+            <input type="submit" value="Create"
+                class="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300" />
+        </div>
+    </form>
+</div>
+
+<div class="mt-4 text-center">
+    <a asp-page="Index" class="text-blue-600 hover:underline">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

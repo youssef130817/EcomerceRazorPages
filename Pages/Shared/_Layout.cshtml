@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MyStore</title>
+    @* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> *@
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Ecomerce.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/tailwind.css" asp-append-version="true" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <header>
+        <nav class="bg-white border-b shadow mb-3">
+            <div class="container mx-auto flex justify-between items-center py-3">
+                <a class="text-lg font-semibold" asp-area="" asp-page="/Produits/Produits">MyStore</a>
+                <button class="block lg:hidden">
+                    <!-- Icon for mobile toggler -->
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+                <div class="hidden lg:flex justify-center flex-grow">
+                    @* <ul class="flex space-x-4">
+                    <li class="nav-item">
+                    <a class="text-gray-800 hover:text-gray-500" asp-area=""
+                    asp-page="/Produits/AllProduits">Home</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="text-gray-800 hover:text-gray-500" asp-area=""
+                    asp-page="/Produits/Index">Produits</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="text-gray-800 hover:text-gray-500" asp-area=""
+                    asp-page="/Categories/Index">Categorie</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="text-gray-800 hover:text-gray-500" asp-area="" asp-page="/Privacy">Privacy</a>
+                    </li>
+                    </ul> *@
+                </div>
+                <ul class="flex justify-end space-x-4">
+                    <li class="nav-item flex">
+                        <img src="~/images/panier.png" alt="Panier" class="w-6 h-6 mr-4" />
+                        <a class="text-gray-800 hover:text-gray-500" asp-area="" asp-page="/Panier">Panier</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container mx-auto">
+        <main role="main" class="pb-8">
+            <!-- Notification d'utilisation des cookies -->
+            <div id="cookie-notification"
+                style="position: fixed; bottom: 0; left: 0; right: 0; background-color: #f8d7da; color: #721c24; padding: 15px; text-align: center; display: none;">
+                <strong>Information:</strong> Ce site utilise des cookies pour améliorer votre expérience.
+                <button id="accept-cookies" class="btn btn-primary">ok</button>
+            </div>
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-t text-center text-gray-600 py-4">
+        <div class="container mx-auto">
+            &copy; 2024 - Ecomerce - <a class="hover:text-gray-500" asp-area="" asp-page="/Privacy">Privacy</a>
+        </div>
+    </footer>
+
+
+    <script>
+        // Affiche la notification si le cookie n'est pas présent
+        if (!document.cookie.includes('cookiesAccepte')) {
+            document.getElementById('cookie-notification').style.display = 'block';
+        }
+
+        // Gestion du bouton Accepter
+        document.getElementById('accept-cookies').onclick = function () {
+            document.cookie = "cookiesAccepte=true; max-age=" + 60 * 60 * 24 * 30 + "; path=/"; // Durée de 30 jours
+            document.getElementById('cookie-notification').style.display = 'none'; // Masquer la notification
+        };
+    </script>
+
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>

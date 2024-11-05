@@ -1,0 +1,55 @@
+@page
+@model Ecomerce.Pages_index.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="text-3xl font-bold mb-4">Index</h1>
+
+<p class="mb-4">
+    <a asp-page="Create" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-500">Create New</a>
+</p>
+
+<div class="overflow-x-auto">
+    <table class="min-w-full bg-white border border-gray-200">
+        <thead>
+            <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+                <th class="py-3 px-6 text-left">
+                    @Html.DisplayNameFor(model => model.Produit[0].Nom)
+                </th>
+                <th class="py-3 px-6 text-left">
+                    @Html.DisplayNameFor(model => model.Produit[0].Description)
+                </th>
+                <th class="py-3 px-6 text-left">
+                    @Html.DisplayNameFor(model => model.Produit[0].Prix)
+                </th>
+                <th class="py-3 px-6 text-left">
+                    @Html.DisplayNameFor(model => model.Produit[0].categorie)
+                </th>
+                <th class="py-3 px-6 text-left"></th>
+            </tr>
+        </thead>
+        <tbody class="text-gray-600 text-sm font-light">
+            @foreach (var item in Model.Produit)
+            {
+                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                    <td class="py-3 px-6">@Html.DisplayFor(modelItem => item.Nom)</td>
+                    <td class="py-3 px-6">@Html.DisplayFor(modelItem => item.Description)</td>
+                    <td class="py-3 px-6">@Html.DisplayFor(modelItem => item.Prix)</td>
+                    <td class="py-3 px-6">
+                        @if (item.categorie != null)
+                        {
+                            @Html.DisplayFor(modelItem => item.categorie.Nom)
+                        }
+                    </td>
+                    <td class="py-3 px-6">
+                        <a asp-page="./Edit" asp-route-id="@item.Id" class="text-blue-600 hover:underline">Edit</a> |
+                        <a asp-page="./Details" asp-route-id="@item.Id" class="text-blue-600 hover:underline">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.Id" class="text-blue-600 hover:underline">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
